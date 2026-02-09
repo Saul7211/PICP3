@@ -902,8 +902,10 @@ body::before {
 }
 
 /* ==================== SCROLL SUAVE ==================== */
-html {
-  scroll-behavior: smooth;
+@supports (scroll-behavior: smooth) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Scrollbar personalizado */
