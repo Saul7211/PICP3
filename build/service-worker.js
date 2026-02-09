@@ -1,7 +1,7 @@
 /* eslint-disable no-restricted-globals */
 
 // Nombre del caché
-const CACHE_NAME = 'biblioteca-virtual-v1';
+const CACHE_NAME = 'biblioteca-virtual-v2';
 
 // Archivos a cachear
 const urlsToCache = [
@@ -49,6 +49,11 @@ self.addEventListener('activate', (event) => {
 
 // Interceptar peticiones de red
 self.addEventListener('fetch', (event) => {
+  // Solo cachear peticiones HTTP/HTTPS (ignorar chrome-extension, etc.)
+  if (!event.request.url.startsWith('http')) {
+    return;
+  }
+
   event.respondWith(
     caches.match(event.request)
       .then((response) => {
